@@ -1,0 +1,32 @@
+{
+  "name": "react-electron",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "Rastelli",
+  "license": "MIT",
+  "scripts": {
+    "build:main": "webpack --config ./config/webpack.config.main.dev.js",
+    "build:dev:react": "webpack-dev-server --config ./config/webpack.config.renderer.dev.js",
+    "build:react": "webpack --config ./config/webpack.config.renderer.dev.js",
+    "start:dev": "yarn build:main && yarn build:dev:react",
+    "start": "yarn build:main && yarn build:react && electron ./build/main.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "electron": "^7.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.6.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-hot-loader": "^4.12.15"
+  }
+}
