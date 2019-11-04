@@ -19,7 +19,12 @@ const config = {
   mode: 'production',
   target: "electron-renderer",
   devtool: "source-map",
-  entry: paths.appIndexJs,
+  entry: {
+    app: [
+      '@babel/polyfill',
+      paths.appIndexJs
+    ]
+  },
   output: {
     filename: "renderer.js",
     path: `${paths.buildSrc}/dist`,

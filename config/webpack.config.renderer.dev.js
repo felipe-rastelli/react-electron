@@ -20,7 +20,13 @@ const config = {
   mode: 'development',
   target: "electron-renderer",
   devtool: "source-map",
-  entry: paths.appIndexJs,
+  entry: {
+    app: [
+      '@babel/polyfill',
+      'react-hot-loader/patch',
+      paths.appIndexJs
+    ]
+  },
   output: {
     filename: "renderer.js",
     path: `${paths.buildSrc}/dist`,
@@ -67,7 +73,7 @@ const config = {
     port: 3000,
     publicPath: '/',
     index: 'index.html',
-    hotOnly: true,
+    hot: true,
     after: (app, server, compiler) => {
       spawn(
         'electron',

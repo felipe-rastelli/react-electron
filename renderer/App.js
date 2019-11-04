@@ -1,12 +1,31 @@
-import React from 'react';
-import { hot } from 'react-hot-loader/root';
+import React, { Component } from 'react';
 
-const App = () => {
-  return (
-    <div>
-      React + Electron simple boilerplate.
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      text: 'teste 2'
+    };
+  }
+
+  componentDidMount() {
+    this.test();
+    console.log(this.state);
+  };
+
+  async test() {
+    const text = await Promise.resolve('with async!');
+    this.setState({ text });
+  };
+
+  render() {
+    return (
+      <div>
+        React + Electron simple boilerplate.
+        <span>{this.state.text}</span>
+      </div>
+    );
+  };
 }
 
-export default hot(App);
+export default App;
