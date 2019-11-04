@@ -11,13 +11,12 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const getFormattedUrl = pathname => {
   let options;
-  console.log('isdev', isDev, process.env.NODE_ENV);
+
   if(isDev) {
     options = {
       protocol: 'http',
       hostname: 'localhost',
       port: 3000,
-      // pathname: 'index.dev.html',
       slashes: true
     };
   } else {
@@ -33,13 +32,12 @@ const getFormattedUrl = pathname => {
 
 const createMainWindow = () => {
   const mainViewURL = getFormattedUrl('/index.html');
-  console.log('criando a maaaiinni', mainViewURL);
 
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: isDev
     }
   });
 

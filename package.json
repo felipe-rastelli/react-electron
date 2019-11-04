@@ -5,11 +5,12 @@
   "author": "Rastelli",
   "license": "MIT",
   "scripts": {
-    "build:main": "webpack --config ./config/webpack.config.main.dev.js",
+    "build:dev:main": "webpack --config ./config/webpack.config.main.dev.js",
     "build:dev:react": "webpack-dev-server --config ./config/webpack.config.renderer.dev.js",
-    "build:react": "webpack --config ./config/webpack.config.renderer.prod.js",
-    "start:dev": "yarn build:main && yarn build:dev:react",
-    "start": "yarn build:main && yarn build:react && electron ./build/main.js"
+    "start:dev": "yarn build:dev:main && yarn build:dev:react",
+    "build:prod:main": "webpack --config ./config/webpack.config.main.prod.js",
+    "build:prod:react": "webpack --config ./config/webpack.config.renderer.prod.js",
+    "start:prod": "yarn build:prod:main && yarn build:prod:react && electron ./build/main.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",

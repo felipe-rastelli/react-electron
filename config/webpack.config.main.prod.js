@@ -5,11 +5,11 @@ const webpack = require('webpack');
 const paths = require("./paths");
 
 const nodeEnvPlugin = new webpack.DefinePlugin({
-  'process.env.NODE_ENV': JSON.stringify('development')
+  'process.env.NODE_ENV': JSON.stringify('production')
 });
 
 const config = {
-  mode: 'development',
+  mode: 'production',
   target: "electron-main",
   devtool: "source-map",
   entry: paths.mainIndexJs,

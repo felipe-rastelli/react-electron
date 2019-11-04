@@ -8,11 +8,6 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 // Local modules
 const paths = require("./paths");
 
-// const htmlPlugin = new HtmlWebPackPlugin({
-//   template: paths.appDevHtml,
-//   filename: paths.appBuildDevHtml,
-//   // inject: true
-// });
 const htmlPlugin = new HtmlWebPackPlugin();
 
 const nodeEnvPlugin = new webpack.DefinePlugin({
@@ -28,7 +23,7 @@ const config = {
   entry: paths.appIndexJs,
   output: {
     filename: "renderer.js",
-    path: paths.appBuild,
+    path: `${paths.buildSrc}/dist`,
     publicPath: "/"
   },
   module: {
@@ -68,7 +63,7 @@ const config = {
     child_process: 'empty',
   },
   devServer: {
-    contentBase: [paths.appBuild],
+    contentBase: [paths.buildSrc],
     port: 3000,
     publicPath: '/',
     index: 'index.html',
@@ -76,7 +71,7 @@ const config = {
     after: (app, server, compiler) => {
       spawn(
         'electron',
-        [`${paths.mainBuild}/main.js`],
+        [`${paths.buildSrc}/main.js`],
         { shell: true, env: process.env, stdio: 'inherit' }
       )
       .on('close', code => process.exit(0))

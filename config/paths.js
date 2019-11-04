@@ -17,15 +17,9 @@ const moduleFileExtensions = [
 module.exports = {
   appSrc: path.resolve(__dirname, '../renderer'),
   appIndexJs: path.resolve(__dirname, '../renderer/index.js'),
-  appBuild: path.resolve(__dirname, '../build/dist'),
-  appBuildHtml: path.resolve(__dirname, '../build/index.html'),
-  appBuildDevHtml: path.resolve(__dirname, '../build/index.dev.html'),
-  appPublic: path.resolve(__dirname, '../public'),
-  appHtml: path.resolve(__dirname, '../public/index.html'),
-  appDevHtml: path.resolve(__dirname, '../public/index.dev.html'),
   mainSrc: path.resolve(__dirname, '../main'),
   mainIndexJs: path.resolve(__dirname, '../main/index.js'),
-  mainBuild: path.resolve(__dirname, '../build'),
+  buildSrc: path.resolve(__dirname, '../build'),
 };
 
 module.exports.moduleFileExtensions = moduleFileExtensions;

@@ -6,9 +6,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const paths = require("./paths");
 
 const htmlPlugin = new HtmlWebPackPlugin({
-  template: paths.appHtml,
-  filename: paths.appBuildHtml,
-  inject: true
+  filename: `${paths.buildSrc}/index.html`  // Auto generate index.html and inject scripts
 });
 
 const nodeEnvPlugin = new webpack.DefinePlugin({
@@ -24,7 +22,8 @@ const config = {
   entry: paths.appIndexJs,
   output: {
     filename: "renderer.js",
-    path: paths.appBuild
+    path: `${paths.buildSrc}/dist`,
+    publicPath: 'dist/'
   },
   module: {
     rules: [
