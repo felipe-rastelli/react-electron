@@ -7,7 +7,7 @@
   "scripts": {
     "build:main": "webpack --config ./config/webpack.config.main.dev.js",
     "build:dev:react": "webpack-dev-server --config ./config/webpack.config.renderer.dev.js",
-    "build:react": "webpack --config ./config/webpack.config.renderer.dev.js",
+    "build:react": "webpack --config ./config/webpack.config.renderer.prod.js",
     "start:dev": "yarn build:main && yarn build:dev:react",
     "start": "yarn build:main && yarn build:react && electron ./build/main.js"
   },

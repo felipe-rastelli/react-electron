@@ -11,12 +11,13 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const getFormattedUrl = pathname => {
   let options;
+  console.log('isdev', isDev, process.env.NODE_ENV);
   if(isDev) {
     options = {
       protocol: 'http',
       hostname: 'localhost',
       port: 3000,
-      pathname,
+      // pathname: 'index.dev.html',
       slashes: true
     };
   } else {
@@ -36,7 +37,10 @@ const createMainWindow = () => {
 
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    }
   });
 
   mainWindow.loadURL(mainViewURL);

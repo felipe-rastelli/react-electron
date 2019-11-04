@@ -1,6 +1,3 @@
-// Node modules
-const { spawn } = require('child_process');
-
 // Webpack modules
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
@@ -8,28 +5,26 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 // Local modules
 const paths = require("./paths");
 
-// const htmlPlugin = new HtmlWebPackPlugin({
-//   template: paths.appDevHtml,
-//   filename: paths.appBuildDevHtml,
-//   // inject: true
-// });
-const htmlPlugin = new HtmlWebPackPlugin();
+const htmlPlugin = new HtmlWebPackPlugin({
+  template: paths.appHtml,
+  filename: paths.appBuildHtml,
+  inject: true
+});
 
 const nodeEnvPlugin = new webpack.DefinePlugin({
-  'process.env.NODE_ENV': JSON.stringify('development')
+  'process.env.NODE_ENV': JSON.stringify('production')
 });
 
 const hotModulePlugin = new webpack.HotModuleReplacementPlugin();
 
 const config = {
-  mode: 'development',
+  mode: 'production',
   target: "electron-renderer",
   devtool: "source-map",
   entry: paths.appIndexJs,
   output: {
     filename: "renderer.js",
-    path: paths.appBuild,
-    publicPath: "/"
+    path: paths.appBuild
   },
   module: {
     rules: [
@@ -66,22 +61,6 @@ const config = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty',
-  },
-  devServer: {
-    contentBase: [paths.appBuild],
-    port: 3000,
-    publicPath: '/',
-    index: 'index.html',
-    hotOnly: true,
-    after: (app, server, compiler) => {
-      spawn(
-        'electron',
-        [`${paths.mainBuild}/main.js`],
-        { shell: true, env: process.env, stdio: 'inherit' }
-      )
-      .on('close', code => process.exit(0))
-      .on('error', err => console.error(err));
-    }
   },
 };
 

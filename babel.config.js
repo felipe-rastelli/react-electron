@@ -3,6 +3,7 @@ const presets = [
     "@babel/preset-env",
     {
       targets: {
+        chrome: 60,
         electron: require('electron/package.json').version
       },
       useBuiltIns: "usage",
