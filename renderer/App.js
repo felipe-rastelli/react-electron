@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './app.css';
 
 class App extends Component {
   constructor() {
@@ -20,7 +21,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="test">
         React + Electron simple boilerplate.
         <span>{this.state.text}</span>
       </div>
