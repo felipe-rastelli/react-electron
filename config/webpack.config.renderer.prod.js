@@ -7,7 +7,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const paths = require("./paths");
 
 const htmlWebPackPluginInstance = new HtmlWebPackPlugin({
-  filename: `${paths.buildSrc}/index.html`  // Auto generate index.html and inject scripts
+  filename: `${paths.buildSrc}/index.html`,  // Auto generate index.html and inject scripts
+  title: 'React + Electron boilerplate',
+  // meta: { viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no' }
 });
 
 const miniCssExtractPluginInstance = new MiniCssExtractPlugin({

@@ -10,6 +10,7 @@ const paths = require("./paths");
 
 const htmlWebPackPluginInstance = new HtmlWebPackPlugin({
   title: 'React + Electron boilerplate',
+  // meta: { viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no' }
 });
 
 const nodeEnvPluginInstance = new webpack.DefinePlugin({
