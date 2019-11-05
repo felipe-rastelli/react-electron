@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import './app.css';
+
+import Dashboard from './components/Dashboard';
+
+import styles from './app.scss';
+// import image from './assets/images/feed-1.png';
 
 class App extends Component {
   constructor() {
@@ -9,21 +13,22 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.test();
-    console.log(this.state);
   };
 
-  async test() {
+  test = async () => {
     const text = await Promise.resolve('with async!');
     this.setState({ text });
   };
 
-  render() {
+  render = () => {
     return (
-      <div className="test">
-        React + Electron simple boilerplate.
+      <div className={styles.test}>
+        React + Electron simple boilerplate!!
         <span>{this.state.text}</span>
+        {/* <img src={image}></img> */}
+        <Dashboard />
       </div>
     );
   };

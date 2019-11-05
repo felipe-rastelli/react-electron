@@ -8,29 +8,28 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 // Local modules
 const paths = require("./paths");
 
-const htmlPlugin = new HtmlWebPackPlugin();
+const htmlWebPackPluginInstance = new HtmlWebPackPlugin({
+  title: 'React + Electron boilerplate',
+});
 
-const nodeEnvPlugin = new webpack.DefinePlugin({
+const nodeEnvPluginInstance = new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify('development')
 });
 
-const hotModulePlugin = new webpack.HotModuleReplacementPlugin();
+const hotModuleReplacementPluginInstance = new webpack.HotModuleReplacementPlugin();
 
 const config = {
   mode: 'development',
   target: "electron-renderer",
   devtool: "source-map",
-  entry: {
-    app: [
-      '@babel/polyfill',
-      'react-hot-loader/patch',
-      paths.appIndexJs
-    ]
-  },
+  entry: [
+    '@babel/polyfill',
+    'react-hot-loader/patch',
+    paths.appIndexJs
+  ],
   output: {
     filename: "renderer.js",
-    path: `${paths.buildSrc}/dist`,
-    publicPath: "/"
+    path: paths.buildSrc,
   },
   module: {
     rules: [
@@ -48,14 +47,74 @@ const config = {
           }
         }
       },
+      // Extract all .global.css to style.css as is
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.global\.css$/,
         use: [
           {
             loader: 'style-loader'
           },
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      },
+      // Pipe other styles through css modules and append to style.css
+      {
+        test: /^((?!\.global).)*\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:5]'
+              },
+              sourceMap: true
+            }
+          }
+        ]
+      },
+      // SASS support - compile all .global.scss files and pipe it to style.css
+      {
+        test: /\.global\.(scss|sass)$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              importLoaders: 1,
+            }
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
+      },
+      // SASS support - compile all other .scss files and pipe it to style.css
+      {
+        test: /^((?!\.global).)*\.(scss|sass)$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:5]'
+              },
+              sourceMap: true,
+              importLoaders: 1,
+            }
           },
           {
             loader: 'sass-loader'
@@ -122,9 +181,9 @@ const config = {
     extensions: paths.moduleFileExtensions
   },
   plugins: [
-    nodeEnvPlugin,
-    htmlPlugin,
-    hotModulePlugin
+    nodeEnvPluginInstance,
+    hotModuleReplacementPluginInstance,
+    htmlWebPackPluginInstance
   ],
   node: {
     module: 'empty',

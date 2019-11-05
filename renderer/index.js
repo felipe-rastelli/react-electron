@@ -2,11 +2,11 @@ import '@babel/polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import Dashboard from "./components/Dashboard";
-
 import { AppContainer } from 'react-hot-loader';
 
 import App from './App';
+
+import './global.scss';
 
 const root = document.createElement('div');
 root.id = "root";
@@ -23,4 +23,7 @@ const render = Component => {
 
 render(App);
 
-if (module.hot) module.hot.accept('./App.js', () => render(App));
+if (module.hot) module.hot.accept('./App', () => {
+  const NextApp = require('./App');
+  render(NextApp);
+});
