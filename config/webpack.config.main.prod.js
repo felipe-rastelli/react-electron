@@ -12,7 +12,10 @@ const config = {
   mode: 'production',
   target: "electron-main",
   devtool: "source-map",
-  entry: paths.mainIndexJs,
+  entry: [
+    '@babel/polyfill',
+    paths.mainIndexJs
+  ],
   output: {
     filename: "main.js",
     path: paths.buildSrc

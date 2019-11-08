@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
+    "ngrok": "^3.2.5",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-hot-loader": "^4.12.15"
